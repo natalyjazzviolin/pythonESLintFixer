@@ -27,25 +27,29 @@ def get_error_list() -> list:
         error_list.append(line)
     retval = terminal.wait()
 
-    return error_list, path
+    path = path.split('/', 2)
+    directory = str(path[2])
+    print(type(directory))
 
-def format_errors(error_list: list, path: str) -> dict:
+    return error_list, directory
+
+def format_errors(error_list: list, directory: str) -> dict:
     dictionary = dict()
     key = ''
     d_values = []
 
 
-    print(f'In formater. Path: { path }')
+    print(f'In formater. Directory: { directory }')
     time.sleep(5)
     df = pd.DataFrame(error_list, columns=['Console Output'])
     print('Data frame created')
-    print(df)
+    # print(df)
     time.sleep(5)
 
     for index, row in df.iterrows():
         # If no filepath has been found yet
         if key != '':
-            if path in row.values[0]:
+            if directory in row.values[0]:
                 key = row.values[0]
             if 'ERROR' in row.values[0]:
                 d_values.append(row.values[0])
@@ -58,10 +62,8 @@ def format_errors(error_list: list, path: str) -> dict:
                 time.sleep(1)
         # If filepath is defined
         else:
-            if path in row.values[0]:
+            if directory in row.values[0]:
                 print('KEY FOUND!')
                 key = row.values[0]
                 print(key)
-
-
     return dictionary
