@@ -14,6 +14,3 @@ error_list = setup[0]
 dictionary = format_errors(error_list, setup[1])
 
 test = File(dictionary)
-
-print(test)
-print(type(test))
