@@ -40,11 +40,9 @@ def format_errors(error_list: list, directory: str) -> dict:
 
 
     print(f'In formater. Directory: { directory }')
-    time.sleep(5)
     df = pd.DataFrame(error_list, columns=['Console Output'])
     print('Data frame created')
     # print(df)
-    time.sleep(5)
 
     for index, row in df.iterrows():
         # If no filepath has been found yet
@@ -59,7 +57,6 @@ def format_errors(error_list: list, directory: str) -> dict:
                 dictionary[key] = d_values
                 key = ''
                 d_values = []
-                time.sleep(1)
         # If filepath is defined
         else:
             if directory in row.values[0]:
